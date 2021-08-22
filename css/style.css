@@ -1,0 +1,80 @@
+*{
+ box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+   background-color: #66441900
+}
+#NavBar{
+    background-color: #090e25;
+    color: #f8fafe;
+    font-size: 24px;
+    padding: 5px;
+    text-align: center;
+}
+
+#mainNavUl{
+    text-align: center;
+    list-style: none;
+    display: inline-flex;
+    margin: 2px auto;
+    /*width: 100%*/
+}
+
+#mainNavUl li {
+    text-align: center;
+    margin-right: 1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#mainNavUl li:hover{
+    
+    color: #851500;
+}
+
+header.frontImg{
+    height: 500px;
+}
+
+header.frontImg img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.h1{
+    text-align: center;
+    font-size: 2em;
+}
+.sectionA,
+.sectionB,
+.sectionC,
+.sectionD,
+article{
+    padding: 1em;
+    font-size: 1.2em;
+    word-wrap: break-word;
+    line-height: 1.2;
+    word-spacing: 1.2;
+}
+
+form{
+    padding: 2em;
+    background: #6868a0;
+}
+form label{
+    margin-right: 3%;
+    padding: 0.3em;
+    font-size: 1em;
+}
+form input{
+    width: 70%;
+    padding: 0.3em 1.2em;
+    font-size: 1em;
+    margin: 10px 0px;
+    border-radius: 10em;
+    
+}
+
