@@ -1,20 +1,23 @@
-*{
- box-sizing: border-box;
+* {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
-body{
-   background-color: #66441900
+
+body {
+    background-color: #66441900
 }
-#NavBar{
-    background-color: #090e25;
+
+#NavBar {
     color: #f8fafe;
     font-size: 24px;
     padding: 5px;
     text-align: center;
+    position: fixed;
+    width: 100%;
 }
 
-#mainNavUl{
+#mainNavUl {
     text-align: center;
     list-style: none;
     display: inline-flex;
@@ -28,53 +31,163 @@ body{
     cursor: pointer;
     font-weight: bold;
 }
+#mainNavUl li a{
+    text-decoration: none;
+    color:white;
+}
+#mainNavUl li a:hover {
 
-#mainNavUl li:hover{
-    
     color: #851500;
 }
 
-header.frontImg{
+header.frontImg {
     height: 500px;
 }
 
-header.frontImg img{
+header.frontImg img {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    
 }
 
-.h1{
+.h1 {
     text-align: center;
     font-size: 2em;
+    background-color: #891803;
 }
+
 .sectionA,
 .sectionB,
 .sectionC,
-.sectionD,
-article{
+article {
     padding: 1em;
     font-size: 1.2em;
     word-wrap: break-word;
     line-height: 1.2;
     word-spacing: 1.2;
+    text-align: center;
 }
 
-form{
+/* Now lets adjust background of each section*/
+.sectionA {
+    background-color: #181010;
+    color: white;
+}
+p{
+    padding: 10px 0px;
+}
+.sectionB {
+    background-color: #89180326;
+}
+
+.sectionC{
+    background-color: #181010;
+    color: white;
+}
+
+.sectionD{
+    background-color: #89180326;
+}
+form {
     padding: 2em;
-    background: #6868a0;
 }
-form label{
-    margin-right: 3%;
-    padding: 0.3em;
-    font-size: 1em;
+
+form label {
+    padding: 0.3em 0;
+    font-size: 1.5em;
+    font-weight: 800;
 }
-form input{
+
+form input {
     width: 70%;
-    padding: 0.3em 1.2em;
+    padding: 0.6em 1.5em;
     font-size: 1em;
     margin: 10px 0px;
-    border-radius: 10em;
-    
+    border-radius: 0.5em;
+
+}
+form input:active,
+input:focus{
+    border: 3px inset rgb(58, 6, 179);
+}
+form button{
+    padding: 1em 1.5em;
+    border-radius: 0.5em;
+    font-weight: 900;
+    background-color: #df2b0bc4
+}
+form button:hover{
+    background-color: #f8f2f1cc;
+}
+/*Handle flaot classes*/
+.float-left{
+    float: left;
+    width: 50%;
+}
+.float-right{
+    float: right;
+}
+.clear-float{
+    clear: both;
+}
+/*footer and copy rights and arrow up*/
+footer{
+    text-align: center;
+    background: #89180369;
+    font-size: 20px;
+}
+#arrow-up{
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 50%;
+    background-color: #c0c4d9;
+    cursor: pointer;
+}
+#arrow-up img{
+    width: 100%;
+    height: 100%;
 }
 
+/*Handle Media queries*/
+@media (max-width : 1126px) and (min-width : 601px){
+
+    label{
+        display: block;
+        width: 100%;
+    }
+    button{
+        width: 25% !important;
+    }
+}
+@media (max-width : 600px) {
+    #NavBar {
+        font-size: 22px;
+        text-align: left;
+    }
+    
+    #mainNavUl {
+        margin: 2px auto;
+        /*width: 100%*/
+    }
+    
+    #mainNavUl li {
+        font-weight:700;
+    }
+    .h1{
+        font-size: 21px;
+    }
+    .sectionA,
+    .sectionB,
+    .sectionC,
+    article {
+        padding: 1em;
+        font-size: 1em;
+    }
+    input{
+        display: block;
+    }
+}
