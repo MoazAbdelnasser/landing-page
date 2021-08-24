@@ -9,62 +9,79 @@ let projectTitle = "Landing Page Site",
     authorLinkden = 'https://www.linkedin.com/in/moaz-abdel-nasser-265461184/',
     sponser ="Udacity Corporation";
 
-    document.getElementById('projectTitle').innerHTML = projectTitle;
-    document.getElementById('author').innerHTML = author;
-    document.getElementById('authorPhone').innerHTML = `<a href="tel:+${authorPhone} "> ${authorPhone}</a>`;
-    document.getElementById('authorLinkden').innerHTML = `<a href = "${authorLinkden}">Linkden Profile </a>`;
-    document.getElementById('sponser').innerHTML = sponser;
-/*Second we will create dynamically four nav menu*/
-
-let nav1 = document.createElement('li'),
-    nav2 = document.createElement('li'),
-    nav3 = document.createElement('li'),
-    nav4 = document.createElement('li');
-nav1.innerHTML = `<a href="#home-page">Home page</a>`;
-nav2.innerHTML = `<a href="#about-us">About us</a>`;
-nav3.innerHTML = `<a href="#services">Services</a>`;
-nav4.innerHTML = `<a href="#contact-us">Contact us</a>`;
-var mainNav = document.getElementById("mainNavUl");
-//Now we will append the Four childern navBars
-mainNav.appendChild(nav1);
-mainNav.appendChild(nav2);
-mainNav.appendChild(nav3);
-mainNav.appendChild(nav4);
-/*Now we need to add an Id for each li to go to it when click the list navBar*/
-/* nav1.setAttribute("id","home-page");
-nav2.setAttribute("id","about-us");
-nav3.setAttribute("id","services");
-nav4.setAttribute("id","contact-us"); */
-/*Testing addEventListener / removeEventListener */
-/**Now we have two variables : sames to be  the same */
-/*
-//removeEventListener() -->>> Works here
-let myfun = function(){
-    console.log("welcome");
-} 
-let nav = document.getElementById("navBar");
-nav.addEventListener('click',myfun);
-// Now Let's remove the event Listener
-nav.removeEventListener('click',myfun); */
-
-/*
-let nav = document.getElementById("navBar");
-nav.addEventListener('click', function () {
-    myfun();
-    // console.log("hi");
-});
-// Now Let's remove the event Listener
-nav.removeEventListener('click', function () {
-    myfun();
-})*/
-//Add background of the navBar while scrolling
-function navBackground(){
-    document.getElementById("navBar").style.backgroundColor = '#090e25';
+let sec = document.getElementsByTagName('section');
+//second we will get create navmenu list at the Navbar
+let mainNav = document.getElementById("navbar__list");
+for(let x of sec){
+    //console.log(x.getAttribute('data-nav'));
+    //debugger
+    nav= document.createElement('li');
+    nav.textContent = x.getAttribute('data-nav');
+    mainNav.appendChild(nav);
 }
 
-document.addEventListener('scroll',navBackground);
-//scroll to top
+//Handle scroll to top-arrow
 let scrolToTop = document.getElementById("arrow-up");
 scrolToTop.addEventListener('click',function(){
     scroll("smoothly",0);
+});
+//Function to handle active nav menu list automatically when called so we can call it when scrolling or click (any other event we want else)
+let activateNav = (actNav) =>{
+    //Loop first at all nav-menu-items : THEN remove the class active-nav'
+    for(let navList of mainNav.querySelectorAll("li")){
+        navList.classList.remove('active-nav');
+    }
+    actNav.classList.add('active-nav');
+}
+//Function to handle active Section automatically when called so we can call it when scrolling or click (any other event we want else)
+let activateSection = (activeSect) =>{
+    for(let sector of sec){
+        sector.classList.remove('your-active-class');
+    };
+    activeSect.classList.add('your-active-class');
+}
+//Handle clicks events on the Navbar item lists
+mainNav.addEventListener('click', (e)=>{
+    //prevent first default actions to the event
+    e.preventDefault();
+    //Now list identify the clicked list item
+    for(let x of sec){
+        if(e.target.textContent == x.getAttribute('data-nav')){
+            //Add Active class for the clicked Nav menu list item
+            activateNav(e.target);
+            //First get the specific Element to the view port
+            x.scrollIntoView({
+                behavior : 'smooth'
+            });
+            //Change that section and the corsponding navmenu list item to active and remove the class from others
+            //We will remove the class first from all sections
+            activateSection(x);
+        }
+    }
+});
+/*Handle Scroll Events to activate 
+    #First :
+        activate the Section at the view port
+    #Second :
+        activate the nav-menu-list for the active section
+*/
+document.addEventListener('scroll', (scrollEv) =>{
+    scrollEv.preventDefault();
+    //Now let's first identify the section that is at the position = 0   
+    //As position zero is the position at top of the document
+    for(let ourActiveSection of sec){
+        if (ourActiveSection.getBoundingClientRect().top == 0 ){
+            activateSection(ourActiveSection);
+            //Now we look for the corrsponding nav-menu-list with the same textContent LIKE data-nav of that section
+            //We need to loop for all nav-menu-list
+            for(let ourAciveNav of mainNav.childNodes){
+                //Let's find active nav-menu-list
+                if(ourAciveNav.textContent == ourActiveSection.getAttribute('data-nav')){
+                    activateNav(ourAciveNav);
+                } 
+                //console.log(ourAciveNav.textContent);
+            }
+        }
+        
+    }
 });
