@@ -8,7 +8,7 @@ let projectTitle = "Landing Page Site",
     authorPhone = '+201115507441',
     authorLinkden = 'https://www.linkedin.com/in/moaz-abdel-nasser-265461184/',
     sponser ="Udacity Corporation";
-
+debugger;
 let sec = document.getElementsByTagName('section');
 //second we will get create navmenu list at the Navbar
 let mainNav = document.getElementById("navbar__list");
@@ -24,6 +24,8 @@ for(let x of sec){
 let scrolToTop = document.getElementById("arrow-up");
 scrolToTop.addEventListener('click',function(){
     scroll("smoothly",0);
+    activateNav(mainNav.children[0]);
+    //scrolToTop.style.display = 'none';
 });
 //Function to handle active nav menu list automatically when called so we can call it when scrolling or click (any other event we want else)
 let activateNav = (actNav) =>{
@@ -65,16 +67,31 @@ mainNav.addEventListener('click', (e)=>{
     #Second :
         activate the nav-menu-list for the active section
 */
-document.addEventListener('scroll', (scrollEv) =>{
-    scrollEv.preventDefault();
+//This is a good function that identify the element at the view port
+var ElementIsInViewport = function (elem) {
+    var bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    );
+}; 
+
+//We need to Make the firstElemnt at the navbar is active by default , then it will be changed automatically when scrolling
+activateNav(mainNav.children[0]);
+document.addEventListener('scroll', function (e) {
+    //debugger
+    e.preventDefault();
     //Now let's first identify the section that is at the position = 0   
     //As position zero is the position at top of the document
     for(let ourActiveSection of sec){
-        if (ourActiveSection.getBoundingClientRect().top == 0 ){
+        
+        if (ElementIsInViewport(ourActiveSection)){
+            //console.log("alert");
             activateSection(ourActiveSection);
             //Now we look for the corrsponding nav-menu-list with the same textContent LIKE data-nav of that section
             //We need to loop for all nav-menu-list
-            for(let ourAciveNav of mainNav.childNodes){
+            //console.log("Hello " + ourActiveSection.getAttribute('data-nav'));
+            for(let ourAciveNav of mainNav.children){
                 //Let's find active nav-menu-list
                 if(ourAciveNav.textContent == ourActiveSection.getAttribute('data-nav')){
                     activateNav(ourAciveNav);
