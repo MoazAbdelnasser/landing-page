@@ -59,8 +59,6 @@ section {
 }
 
 
-/* ---- Module Rules ---- */
-
 /* Navigation Styles*/
 .navbar__menu ul {
     padding-left: 0;
@@ -84,6 +82,13 @@ section {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
+}
+#toResponsive-button{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2em;
+    display: none;
 }
 
 /* Header Styles */
@@ -222,9 +227,10 @@ section.your-active-class .landing__container::after {
 }
 /* Now let's Customize our Landing Page**/
 #navbar__list{
-    background-color: #3f6670;
+    background-color: #112449ed;
     padding: 10px;
     color: black;
+    transition: all 1s ease-in-out;
 }
 #navbar__list li{
     margin-left: 30px;
@@ -235,17 +241,11 @@ section.your-active-class .landing__container::after {
 }
 /*Avtive Navigation*/
 .active-nav{
-    color: #dad2d2;;
+    color: #dad2d2;
+    
     /*background-color: black;*/
 }
-@media only screen and (max-width: 750px){
-    #navbar__list li{
-        display: block;
-        margin-top: 10px;
-        font-size: 20px;
-        
-    }
-}
+
 #arrow-up{
     width: 40px;
     height: 40px;
@@ -263,8 +263,50 @@ section.your-active-class .landing__container::after {
 
 /*Handle Media queries*/
 @media (max-width : 1126px) and (min-width : 601px){
-
+    #navbar__list{
+        display: none;
+        text-align: center;
+        border-radius: 0px 0px 10px 10px;
+    }
+    #navbar__list li{
+        display: block;
+        margin-top: 10px;
+        font-size: 28px;
+        padding: 7px 3em;
+    }
+     #navbar__list li:first-child{
+        margin-top: 6%;
+    }
+    #toResponsive-button{
+        display: block;
+        cursor: pointer;
+        padding: 12px;
+        background-color: #3b5e6aad;
+    }
+    
 }
 @media (max-width : 600px) {
+    #navbar__list{
+        display: none;
+        text-align: center;
+        border-radius: 0px 0px 10px 10px;
+    }
    
+    #navbar__list li{
+        display: block;
+        margin-top: 10px;
+        font-size: 28px;
+        padding: 7px 3em;
+    }
+    #navbar__list li:first-child{
+        margin-top: 6%;
+    }
+    
+    #toResponsive-button{
+        display: block;
+        cursor: pointer;
+        padding: 5px;
+        background-color: #3b5e6aad;
+    }
+    
 }

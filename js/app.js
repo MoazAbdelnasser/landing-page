@@ -8,7 +8,7 @@ let projectTitle = "Landing Page Site",
     authorPhone = '+201115507441',
     authorLinkden = 'https://www.linkedin.com/in/moaz-abdel-nasser-265461184/',
     sponser ="Udacity Corporation";
-debugger;
+//debugger;
 let sec = document.getElementsByTagName('section');
 //second we will get create navmenu list at the Navbar
 let mainNav = document.getElementById("navbar__list");
@@ -30,6 +30,7 @@ scrolToTop.addEventListener('click',function(){
 //Function to handle active nav menu list automatically when called so we can call it when scrolling or click (any other event we want else)
 let activateNav = (actNav) =>{
     //Loop first at all nav-menu-items : THEN remove the class active-nav'
+    //actNav.classList.add('active-nav');
     for(let navList of mainNav.querySelectorAll("li")){
         navList.classList.remove('active-nav');
     }
@@ -42,25 +43,7 @@ let activateSection = (activeSect) =>{
     };
     activeSect.classList.add('your-active-class');
 }
-//Handle clicks events on the Navbar item lists
-mainNav.addEventListener('click', (e)=>{
-    //prevent first default actions to the event
-    e.preventDefault();
-    //Now list identify the clicked list item
-    for(let x of sec){
-        if(e.target.textContent == x.getAttribute('data-nav')){
-            //Add Active class for the clicked Nav menu list item
-            activateNav(e.target);
-            //First get the specific Element to the view port
-            x.scrollIntoView({
-                behavior : 'smooth'
-            });
-            //Change that section and the corsponding navmenu list item to active and remove the class from others
-            //We will remove the class first from all sections
-            activateSection(x);
-        }
-    }
-});
+
 /*Handle Scroll Events to activate 
     #First :
         activate the Section at the view port
@@ -68,8 +51,8 @@ mainNav.addEventListener('click', (e)=>{
         activate the nav-menu-list for the active section
 */
 //This is a good function that identify the element at the view port
-var ElementIsInViewport = function (elem) {
-    var bounding = elem.getBoundingClientRect();
+let ElementIsInViewport = function (elem) {
+    let bounding = elem.getBoundingClientRect();
     return (
         bounding.top >= 0 &&
         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
@@ -78,12 +61,12 @@ var ElementIsInViewport = function (elem) {
 
 //We need to Make the firstElemnt at the navbar is active by default , then it will be changed automatically when scrolling
 activateNav(mainNav.children[0]);
-document.addEventListener('scroll', function (e) {
+let scrollEventHandle = document.addEventListener('scroll', function (e) {
     //debugger
     e.preventDefault();
     //Now let's first identify the section that is at the position = 0   
-    //As position zero is the position at top of the document
-    for(let ourActiveSection of sec){
+        //As position zero is the position at top of the document
+        for(let ourActiveSection of sec){
         
         if (ElementIsInViewport(ourActiveSection)){
             //console.log("alert");
@@ -100,5 +83,40 @@ document.addEventListener('scroll', function (e) {
             }
         }
         
+    }
+});
+//Let's now optimize responsiveness at our page
+//Let's define our function that works as toggle(show or hide element)
+let toggleFun = el=>{
+    if(el.style.display == "none"){
+        el.style.display = "block";
+    }
+    else{
+        el.style.display = "none";
+    }
+}
+let responsiveButton = document.getElementById("toResponsive-button");
+responsiveButton.addEventListener('click',function(){
+   toggleFun(mainNav);
+});
+//Handle clicks events on the Navbar item lists
+mainNav.addEventListener('click', (e)=>{
+    //prevent first default actions to the event
+    e.preventDefault();
+    //Now list identify the clicked list item
+    for(let x of sec){
+        if(e.target.textContent == x.getAttribute('data-nav')){
+            //First get the specific Element to the view port
+            x.scrollIntoView({
+                behavior : 'smooth'
+            });
+            //Change that section and the corsponding navmenu list item to active and remove the class from others
+            //We will remove the class first from all sections
+            //Add Active class for the clicked Nav menu list item
+            activateNav(e.target);
+            activateSection(x);
+            
+            
+        }
     }
 });
